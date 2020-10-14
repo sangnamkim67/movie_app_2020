@@ -16,7 +16,13 @@ class movie extends Component {
                 <div className="movie__data">
                     <h3 className="movie__title">{movie.title}</h3>
                     <h5 className="movie__date">{movie.release_date}</h5>
-                    <h5 className="movie__rate">평점 : {movie.vote_average}</h5>
+                    <h5 className="movie__rate">
+                        평점 :{" "}
+                        <span role="img" aria-label="star">
+                            ⭐
+                        </span>
+                        {movie.vote_average}
+                    </h5>
                     <ul className="movie__genres">
                         {movie.genre_ids.map((genre, index) => {
                             return (
