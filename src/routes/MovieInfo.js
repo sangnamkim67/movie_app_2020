@@ -2,7 +2,6 @@ import React from "react";
 import "./About.css";
 
 function About(props) {
-    console.log(props);
     return (
         <div className="about__container">
             <span>
@@ -10,13 +9,7 @@ function About(props) {
                 that is granted, all else follows.”
             </span>
             <span>− George Orwell, 1984</span>
-            <br />
-            <br />
-            <span>
-                <span role="img" aria-label="movie">
-                    🎬 NomadCoder : React로 영화 웹서비스 🎬 ✍ CLONE CODING
-                </span>
-            </span>
+            <span>NomadCoder : React로 영화 웹서비스 CLONE CODING</span>
             <ul>
                 <li>영화 리스트 출력</li>
                 <li>영화 상세 정보</li>

@@ -10,17 +10,20 @@ class movie extends Component {
         };
     }
     render() {
+        // props로 받은 영화 데이터를 state에 저장
         const { movie } = this.state;
         return (
             <Link
-                to="/about"
+                to="/movieinfo"
                 style={{ textDecoration: "none", color: "black" }}
             >
                 <section className="movie">
                     <img src={movie.poster_path} alt={movie.title} />
                     <div className="movie__data">
                         <h3 className="movie__title">{movie.title}</h3>
-                        <h5 className="movie__date">{movie.release_date}</h5>
+                        <h5 className="movie__date">
+                            개봉일 : {movie.release_date}
+                        </h5>
                         <h5 className="movie__rate">
                             평점 :{" "}
                             <span role="img" aria-label="star">
