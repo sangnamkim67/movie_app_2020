@@ -47,7 +47,7 @@ class movie extends Component {
                             })}
                         </ul>
                         <p className="movie__summary">
-                            {movie.overview.slice(0, 150)}...
+                            {movie.overview.slice(0, 90)}...
                         </p>
                     </div>
                 </section>
