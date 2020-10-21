@@ -17,6 +17,11 @@ body {
     display: flex;
     justify-content: center;
 }
+.input__movieInfo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .movies {
     display: grid;
     grid-template-columns: repeat(2, minmax(400px, 1fr));

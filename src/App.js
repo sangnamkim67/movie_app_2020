@@ -14,7 +14,7 @@ class App extends Component {
                     <Route path="/" exact={true} component={Home} />
                     <Route path="/search" exact={true} component={Search} />
                     <Route
-                        path="/movieinfo"
+                        path="/movieinfo/:name"
                         exact={true}
                         component={MovieInfo}
                     />

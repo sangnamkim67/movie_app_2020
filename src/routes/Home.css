@@ -12,12 +12,11 @@ body {
     background-color: #eff3f7;
     height: 100%;
 }
-.container {
-    height: 100%;
+.container__movie {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-
 .loader {
     width: 100%;
     height: 100vh;

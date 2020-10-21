@@ -63,16 +63,21 @@ class Home extends Component {
     }
     render() {
         const { isLoading, movies } = this.state;
-        console.log(this.state);
+
         return (
             <div className="container">
                 {isLoading ? (
                     <div className="loader">"Loading..."</div>
                 ) : (
-                    <div className="movies">
-                        {movies.map((movie, index) => {
-                            return <Movie key={index} movie={movie}></Movie>;
-                        })}
+                    <div className="container__movie">
+                        <h1>The Movie Database 선정 인기 영화</h1>
+                        <div className="movies">
+                            {movies.map((movie, index) => {
+                                return (
+                                    <Movie key={index} movie={movie}></Movie>
+                                );
+                            })}
+                        </div>
                     </div>
                 )}
             </div>

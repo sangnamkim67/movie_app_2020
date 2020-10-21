@@ -12,9 +12,15 @@ class movie extends Component {
     render() {
         // props로 받은 영화 데이터를 state에 저장
         const { movie } = this.state;
+
         return (
             <Link
-                to="/movieinfo"
+                to={{
+                    pathname: `/movieinfo/${movie.title}`,
+                    state: {
+                        movie: movie,
+                    },
+                }}
                 style={{ textDecoration: "none", color: "black" }}
             >
                 <section className="movie">

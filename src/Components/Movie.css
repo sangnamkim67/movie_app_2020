@@ -9,6 +9,7 @@
         0 8px 16px -8px rgba(0, 0, 0, 0.3),
         0 -6px 16px -6px rgba(0, 0, 0, 0.025);
 }
+
 .movies .movie > img {
     position: relative;
     top: -25px;
@@ -48,5 +49,12 @@
     font-size: 14px;
 }
 .movie .movie__summary {
+    margin-right: 10px;
+}
+.movie .movie__director {
+    margin-right: 10px;
+    font-size: 14px;
+}
+.movie .movie__actor {
     margin-right: 10px;
 }

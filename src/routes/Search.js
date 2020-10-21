@@ -14,11 +14,13 @@ class Search extends Component {
         const search = this.state.inputValue;
         const CLIENT_ID = "pCpuMhiCRw30kMKAufSW";
         const CLIENT_SECRET = "DjNU7OmUJA";
+
         try {
             if (search === "") {
                 this.setState({
                     isLoading: false,
                     movies: [],
+                    inputValue: "",
                 });
             } else {
                 await axios
@@ -40,7 +42,21 @@ class Search extends Component {
                         });
                     })
                     .catch(function (error) {
-                        console.log(error);
+                        if (error.response) {
+                            // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+                            console.log(error.response.data);
+                            console.log(error.response.status);
+                            console.log(error.response.headers);
+                        } else if (error.request) {
+                            // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+                            // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+                            // Node.js의 http.ClientRequest 인스턴스입니다.
+                            console.log(error.request);
+                        } else {
+                            // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+                            console.log("Error", error.message);
+                        }
+                        console.log(error.config);
                     });
             }
         } catch (e) {
@@ -73,31 +89,31 @@ class Search extends Component {
                 {isLoading ? (
                     <div className="loader">"Loading..."</div>
                 ) : (
-                    <div>
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="input__div">
-                                <h1>영화 검색</h1>
-                                <input
-                                    placeholder="찾으실 영화를 입력하세요."
-                                    value={inputValue}
-                                    onChange={this.handleChange}
-                                    name="movie"
-                                ></input>
-                            </div>
-
-                            <div className="movies">
-                                {movies.map((movie, index) => {
-                                    return (
-                                        <SearchMovie
-                                            key={index}
-                                            id={movie.link}
-                                            movie={movie}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        </form>
-                    </div>
+                    <form
+                        className="input__movieInfo"
+                        onSubmit={this.handleSubmit}
+                    >
+                        <div className="input__div">
+                            <h1>영화 검색</h1>
+                            <input
+                                placeholder="찾으실 영화를 입력하세요."
+                                value={inputValue}
+                                onChange={this.handleChange}
+                                name="movie"
+                            ></input>
+                        </div>
+                        <div className="movies">
+                            {movies.map((movie, index) => {
+                                return (
+                                    <SearchMovie
+                                        key={index}
+                                        id={movie.link}
+                                        movie={movie}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </form>
                 )}
             </section>
         );
