@@ -8,6 +8,7 @@ class SearchMovie extends Component {
 
     render() {
         const { movie } = this.state;
+
         const title = movie.title.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
         const director = movie.director.replace(/\|/g, ",");
         const actor = movie.actor.replace(/\|/g, " , ");

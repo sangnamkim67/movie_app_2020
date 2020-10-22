@@ -83,7 +83,7 @@ class Search extends Component {
 
     render() {
         const { inputValue, isLoading, movies } = this.state;
-
+        console.log(this.props);
         return (
             <section className="container">
                 {isLoading ? (
