@@ -34,7 +34,7 @@ class Home extends Component {
         });
     };
     // axios multi request : genre_id = 숫자 -> 한글, poster_path = image경로로 치환
-    getData = async () => {
+    getMovieData = async () => {
         await axios.all([this.getMovies(), this.getGenres()]).then(
             axios.spread((movies, genres) => {
                 this.setState({
@@ -59,7 +59,7 @@ class Home extends Component {
     };
 
     componentDidMount() {
-        this.getData();
+        this.getMovieData();
     }
     render() {
         const { isLoading, movies } = this.state;

@@ -8,12 +8,11 @@ class Search extends Component {
         isLoading: true,
         inputValue: "",
         movies: [],
+        genres: [],
     };
-
-    getSearchMovie = async () => {
+    getSearchResult = async () => {
+        const API_KEY = "14ce7484c2d20fd447935baf71898e14"; // THE MOVIE DATABASE OPENAPI KEY
         const search = this.state.inputValue;
-        const CLIENT_ID = "pCpuMhiCRw30kMKAufSW";
-        const CLIENT_SECRET = "DjNU7OmUJA";
 
         try {
             if (search === "") {
@@ -24,51 +23,60 @@ class Search extends Component {
                 });
             } else {
                 await axios
-                    .get("/v1/search/movie.json", {
+                    .get("https://api.themoviedb.org/3/search/movie", {
                         params: {
+                            api_key: API_KEY,
+                            language: "ko-kr",
                             query: search,
-                            display: 20,
-                        },
-                        headers: {
-                            "X-Naver-Client-Id": CLIENT_ID,
-                            "X-Naver-Client-Secret": CLIENT_SECRET,
+                            page: 1,
+                            include_adult: false,
                         },
                     })
                     .then((response) => {
-                        const { items } = response.data;
-                        this.setState({
-                            movies: items,
-                            isLoading: false,
+                        const { results } = response.data;
+
+                        results.map((movie) => {
+                            movie.backdrop_path = `http://image.tmdb.org/t/p/w1920_and_h800_multi_faces${movie.backdrop_path}`;
+                            movie.poster_path = `http://image.tmdb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`;
+                            return movie;
                         });
-                    })
-                    .catch(function (error) {
-                        if (error.response) {
-                            // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
-                            console.log(error.response.data);
-                            console.log(error.response.status);
-                            console.log(error.response.headers);
-                        } else if (error.request) {
-                            // 요청이 이루어 졌으나 응답을 받지 못했습니다.
-                            // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
-                            // Node.js의 http.ClientRequest 인스턴스입니다.
-                            console.log(error.request);
-                        } else {
-                            // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
-                            console.log("Error", error.message);
-                        }
-                        console.log(error.config);
+
+                        this.setState({
+                            isLoading: false,
+                            movies: results,
+                        });
                     });
             }
         } catch (e) {
             console.log(e);
         }
     };
+    getGenres = async () => {
+        const API_KEY = "14ce7484c2d20fd447935baf71898e14"; // THE MOVIE DATABASE OPENAPI KEY
+        const GENRE_URL = "https://api.themoviedb.org/3/genre/movie/list";
+        await axios
+            .get(GENRE_URL, {
+                params: {
+                    api_key: API_KEY,
+                    language: "ko-KR",
+                },
+            })
+            .then((response) => {
+                const { genres } = response.data;
+                this.setState({
+                    genres: genres,
+                });
+            });
+    };
+
     componentDidMount() {
-        this.getSearchMovie();
+        this.getSearchResult();
+        this.getGenres();
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        this.getSearchMovie();
+        this.getSearchResult();
+
         this.setState({
             inputValue: "",
             movies: [],
@@ -83,7 +91,7 @@ class Search extends Component {
 
     render() {
         const { inputValue, isLoading, movies } = this.state;
-        console.log(this.props);
+
         return (
             <section className="container">
                 {isLoading ? (
@@ -105,11 +113,7 @@ class Search extends Component {
                         <div className="movies">
                             {movies.map((movie, index) => {
                                 return (
-                                    <SearchMovie
-                                        key={index}
-                                        id={movie.link}
-                                        movie={movie}
-                                    />
+                                    <SearchMovie key={index} movie={movie} />
                                 );
                             })}
                         </div>

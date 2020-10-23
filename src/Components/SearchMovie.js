@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Movie.css";
 
 class SearchMovie extends Component {
@@ -8,43 +9,46 @@ class SearchMovie extends Component {
 
     render() {
         const { movie } = this.state;
-
-        const title = movie.title.replace(/<b>/gi, "").replace(/<\/b>/gi, "");
-        const director = movie.director.replace(/\|/g, ",");
-        const actor = movie.actor.replace(/\|/g, " , ");
+        // con
         return (
-            <section>
-                <div className="movie">
-                    <img
-                        src={
-                            movie.image
-                                ? movie.image
-                                : "http://placehold.it/120X180"
-                        }
-                        alt={title}
-                    />
+            <Link
+                to={{
+                    pathname: `/movieinfo/${movie.title}`,
+                    state: {
+                        movie: movie,
+                    },
+                }}
+                style={{ textDecoration: "none", color: "black" }}
+            >
+                <section className="movie">
+                    <img src={movie.poster_path} alt={movie.title} />
                     <div className="movie__data">
-                        <h3 className="movie__title">{title}</h3>
+                        <h3 className="movie__title">{movie.title}</h3>
+                        <h5 className="movie__date">
+                            개봉일 : {movie.release_date}
+                        </h5>
                         <h5 className="movie__rate">
                             평점 :{" "}
                             <span role="img" aria-label="star">
                                 ⭐
                             </span>
-                            {movie.userRating}
+                            {movie.vote_average}
                         </h5>
-                        <h5 className="movie__date">
-                            개봉년도 : {movie.pubDate}
-                        </h5>
-                        <h5 className="movie__director">감독 : {director}</h5>
-                        <p className="movie__actor">
-                            배우 :{" "}
-                            {movie.actor === ""
-                                ? "알수 없음"
-                                : actor.slice(0, 100)}
+                        {/* <ul className="movie__genres">
+                            {movie.genre_ids.map((genre, index) => {
+                                return (
+                                    <li key={index} className="genres__genre">
+                                        {genre}
+                                    </li>
+                                );
+                            })}
+                        </ul> */}
+                        <p className="movie__summary">
+                            {movie.overview.slice(0, 90)}...
                         </p>
                     </div>
-                </div>
-            </section>
+                </section>
+            </Link>
         );
     }
 }
