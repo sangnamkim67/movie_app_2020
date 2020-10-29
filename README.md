@@ -25,6 +25,8 @@ The Movie Database의 openAPI를 활용하여 만든 영화 추천 웹
 - 메인 페이지
 ![main page](https://images.velog.io/images/nami0515/post/332c99cd-2701-4af6-ae21-82fbe137efb8/main%20page.jpg)
 - 영화 검색
+<br/>
+
 ![](https://images.velog.io/images/nami0515/post/b19a91a7-ffee-4e1d-938f-326cb77abb0b/Search%20page1.JPG)
 ![](https://images.velog.io/images/nami0515/post/cc6fee6d-d794-4434-9c92-12c80a89555c/search%20page2.jpg)
 
