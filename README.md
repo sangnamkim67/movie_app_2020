@@ -5,7 +5,7 @@ NomadCoder 의 강의를 듣고 만든 React Movie App
 
 ### 1. 개요
 <hr/>
-The Movie Database의 openAPI를 활용하여 만든 영화 추천 웹
+The Movie Database의 openAPI를 활용하여 만든 영화 추천 웹,
 웹서비스를 위주로 반응형 웹은 고려하지 않았으며, Windows환경의 chrome app에서 진행되었음 
 
 <br/>
